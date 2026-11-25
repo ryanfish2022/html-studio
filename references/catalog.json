@@ -1,0 +1,116 @@
+{
+  "version": "1.0.0",
+  "modes": [
+    {
+      "id": "long-profile",
+      "name": "纵向滚动公司介绍长网页",
+      "starter": "assets/starter-long.html",
+      "bestFor": ["企业官网介绍页", "微信/移动端转发", "深度品牌叙事", "带产品/能力交互展示"],
+      "motionProfile": "restrained-scrolltrigger",
+      "printPage": "A4 landscape"
+    },
+    {
+      "id": "deck",
+      "name": "16:9 演示画册 / 路演 Deck",
+      "starter": "assets/starter-deck.html",
+      "bestFor": ["客户宣讲", "投融资路演 BP", "年度概览", "需逐页导出标准横屏 PDF"],
+      "motionProfile": "slide-transition",
+      "printPage": "1920px 1080px"
+    },
+    {
+      "id": "motion-opener",
+      "name": "品牌宣传片 / 动态开场 HTML",
+      "starter": null,
+      "bestFor": ["展厅大屏", "官网首屏自动播放片头", "品牌发布倒计时/快闪", "需导出 MP4"],
+      "motionProfile": "continuous-timeline",
+      "printPage": null
+    }
+  ],
+  "styles": [
+    {
+      "id": "consulting-editorial",
+      "name": "高级咨询编辑风",
+      "industries": ["管理咨询", "金融保险", "法律财税", "企业级服务"],
+      "surface": "warm-ivory",
+      "palette": {
+        "paper": "#F7F5F0",
+        "surface": "#FFFFFF",
+        "ink": "#16202A",
+        "muted": "#52606D",
+        "accent": "#1E4D40",
+        "accentSoft": "#DCE8E4",
+        "line": "#D8D4CA"
+      },
+      "typography": "Noto Serif SC 封面标题 + Noto Sans SC 正文",
+      "layoutCue": "不对称杂志分栏、细规则分割线、数据对比表与清晰结论块"
+    },
+    {
+      "id": "refined-warm-atelier",
+      "name": "温润爱马仕橙品牌风",
+      "industries": ["消费品牌", "设计机构", "新零售", "生活方式", "文创"],
+      "surface": "sand-cream",
+      "palette": {
+        "paper": "#FBF8F3",
+        "surface": "#FFFFFF",
+        "ink": "#1F1B18",
+        "muted": "#6E655E",
+        "accent": "#C85A28",
+        "accentSoft": "#F7E5DB",
+        "line": "#E7DFD5"
+      },
+      "typography": "Noto Sans SC 800 大标题 + 霞鹜文楷短句点缀",
+      "layoutCue": "大幅画册留白、暖色色块锚点、高质感产品或场景图文混排"
+    },
+    {
+      "id": "precision-green-grid",
+      "name": "清爽秩序网格风",
+      "industries": ["SaaS", "新能源", "医疗健康", "智能制造", "供应链"],
+      "surface": "crisp-offwhite",
+      "palette": {
+        "paper": "#F4F7F5",
+        "surface": "#FFFFFF",
+        "ink": "#0F241D",
+        "muted": "#4A6158",
+        "accent": "#117A5B",
+        "accentSoft": "#D9F0E6",
+        "line": "#D3E0D9"
+      },
+      "typography": "Noto Sans SC 全层级字重 + 等宽数字 tabular-nums",
+      "layoutCue": "结构化网格指标卡、SVG 流程与系统拓扑图、明晰对比矩阵"
+    },
+    {
+      "id": "rational-warm-ai",
+      "name": "温暖理性技术风",
+      "industries": ["AI 产品", "开发者工具", "科研机构", "知识型团队"],
+      "surface": "stone-paper",
+      "palette": {
+        "paper": "#F5F4EF",
+        "surface": "#FDFCF9",
+        "ink": "#191918",
+        "muted": "#5C5B57",
+        "accent": "#B85D3B",
+        "accentSoft": "#EFE4DC",
+        "line": "#DFDDD4"
+      },
+      "typography": "Noto Sans SC + Inter / 等宽代码标识",
+      "layoutCue": "左窄右宽叙事节奏、清晰时间线、架构图与产品真实界面切片"
+    },
+    {
+      "id": "obsidian-industrial",
+      "name": "深邃极光工业风",
+      "industries": ["硬科技", "芯片半导体", "云计算", "新能源汽车", "高端装备"],
+      "surface": "deep-slate",
+      "palette": {
+        "paper": "#0B1117",
+        "surface": "#121B24",
+        "ink": "#F0F5FA",
+        "muted": "#93A4B7",
+        "accent": "#38BDF8",
+        "accentSoft": "#132F44",
+        "line": "#223243"
+      },
+      "typography": "Noto Sans SC 900 宽字距标题 + 亮青/琥珀点睛",
+      "layoutCue": "克制深色氛围光晕（仅限封面/结尾）、高亮数据指标、暗色矢量架构图"
+    }
+  ]
+}

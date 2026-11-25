@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="deck" data-style="consulting-editorial">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{COMPANY_NAME}} 16:9 公司介绍演示画册。">
+  <title>{{COMPANY_NAME}} — 公司介绍演示</title>
+  <style>
+    :root {
+      --paper: #F7F5F0;
+      --surface: #FFFFFF;
+      --ink: #16202A;
+      --muted: #52606D;
+      --accent: #1E4D40;
+      --accent-soft: #DCE8E4;
+      --line: #D8D4CA;
+      --font-display: "Noto Serif SC", Georgia, "Songti SC", serif;
+      --font-body: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html, body {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+      background: #0f1419;
+      color: var(--ink);
+      font-family: var(--font-body);
+      overflow: hidden;
+    }
+
+    .deck-viewport {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .deck-stage {
+      width: 1920px;
+      height: 1080px;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform-origin: center center;
+      transform: translate(-50%, -50%);
+      background: var(--paper);
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+      overflow: hidden;
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 84px 96px 116px;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--paper);
+    }
+    .slide[aria-hidden="false"] {
+      display: flex;
+    }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 0;
+    }
+
+    .slide-footer {
+      position: absolute;
+      left: 96px;
+      right: 96px;
+      top: 991px;
+      height: 44px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 18px;
+      color: var(--muted);
+    }
+
+    .t-cover { font-family: var(--font-display); font-weight: 900; font-size: 84px; line-height: 1.12; margin: 0 0 28px; }
+    .t-title { font-family: var(--font-display); font-weight: 800; font-size: 52px; line-height: 1.2; margin: 0 0 24px; }
+    .t-lede  { font-size: 28px; line-height: 1.5; color: var(--muted); max-width: 38em; margin: 0; }
+
+    .deck-nav {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      z-index: 9000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 14px;
+      border-radius: 999px;
+      background: rgba(16, 24, 34, 0.78);
+      backdrop-filter: blur(8px);
+      color: #fff;
+    }
+    .deck-nav button {
+      appearance: none;
+      border: 0;
+      background: transparent;
+      color: #fff;
+      font-size: 14px;
+      cursor: pointer;
+      padding: 4px 10px;
+      border-radius: 999px;
+    }
+    .deck-nav button:hover { background: rgba(255, 255, 255, 0.16); }
+    .deck-dots { display: flex; gap: 6px; align-items: center; }
+    .deck-dot {
+      width: 8px; height: 8px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.35);
+      border: 0; padding: 0 !important;
+    }
+    .deck-dot[aria-current="true"] {
+      width: 22px;
+      background: #fff;
+    }
+
+    @media print {
+      @page { size: 1920px 1080px; margin: 0; }
+      html, body { width: 1920px; height: auto; overflow: visible; background: #fff; }
+      .deck-viewport { display: block; width: 1920px; height: auto; }
+      .deck-stage { transform: none !important; width: 1920px; height: auto; box-shadow: none; overflow: visible; }
+      .slide {
+        position: relative !important;
+        display: flex !important;
+        width: 1920px;
+        height: 1080px;
+        page-break-after: always;
+        break-after: page;
+        opacity: 1 !important;
+      }
+      .slide:last-child { page-break-after: auto; break-after: auto; }
+      .deck-nav { display: none !important; }
+    }
+  </style>
+</head>
+<body data-layout="deck">
+  <main class="deck-viewport" id="main-content">
+    <div class="deck-stage" id="deck-stage">
+      <section class="slide" data-type="cover" aria-hidden="false">
+        <div class="slide-body">
+          <p style="font-size:22px;font-weight:700;color:var(--accent);margin:0 0 20px;" data-editable-html>{{INDUSTRY_LABEL}}</p>
+          <h1 class="t-cover" data-editable-html>{{COMPANY_NAME}}<br>{{HERO_HEADLINE}}</h1>
+          <p class="t-lede" data-editable-html>{{HERO_SUBTITLE}}</p>
+        </div>
+        <footer class="slide-footer">
+          <span data-editable-html>{{COMPANY_NAME}} — 企业介绍</span>
+          <span class="slide-num">01 / 03</span>
+        </footer>
+      </section>
+
+      <section class="slide" data-type="metrics" aria-hidden="true">
+        <div class="slide-body">
+          <h2 class="t-title" data-editable-html>核心经营与交付指标</h2>
+          <svg viewBox="0 0 1600 540" role="img" aria-labelledby="deck-kpi-title" data-exportable>
+            <title id="deck-kpi-title">核心指标概览</title>
+            <rect x="0" y="20" width="490" height="480" rx="16" fill="#FFFFFF" stroke="#D8D4CA" data-editable-shape/>
+            <rect x="555" y="20" width="490" height="480" rx="16" fill="#FFFFFF" stroke="#D8D4CA" data-editable-shape/>
+            <rect x="1110" y="20" width="490" height="480" rx="16" fill="#1E4D40" data-editable-shape/>
+            <text x="56" y="180" fill="#1E4D40" font-size="96" font-weight="900" data-editable-text>12+</text>
+            <text x="56" y="250" fill="#16202A" font-size="30" font-weight="700" data-editable-text>深耕行业年限</text>
+            <text x="611" y="180" fill="#1E4D40" font-size="96" font-weight="900" data-editable-text>300+</text>
+            <text x="611" y="250" fill="#16202A" font-size="30" font-weight="700" data-editable-text>服务政企客户（演示）</text>
+            <text x="1166" y="180" fill="#FFFFFF" font-size="96" font-weight="900" data-editable-text>99.9%</text>
+            <text x="1166" y="250" fill="#DCE8E4" font-size="30" font-weight="700" data-editable-text>核心系统可用性（演示）</text>
+          </svg>
+        </div>
+        <footer class="slide-footer">
+          <span data-editable-html>{{COMPANY_NAME}} — 核心数据</span>
+          <span class="slide-num">02 / 03</span>
+        </footer>
+      </section>
+
+      <section class="slide" data-type="closing" aria-hidden="true">
+        <div class="slide-body">
+          <h2 class="t-cover" data-editable-html>期待与您携手合作</h2>
+          <p class="t-lede" data-editable-html data-asset-status="licensed" data-license-source="Inline vector deck template">商务合作与方案咨询：{{CONTACT_INFO}}</p>
+        </div>
+        <footer class="slide-footer">
+          <span data-editable-html>{{COMPANY_NAME}} — 联系我们</span>
+          <span class="slide-num">03 / 03</span>
+        </footer>
+      </section>
+    </div>
+  </main>
+
+  <nav class="deck-nav" aria-label="幻灯片导航">
+    <button type="button" id="btn-prev" aria-label="上一页">上一页</button>
+    <div class="deck-dots" id="deck-dots"></div>
+    <button type="button" id="btn-next" aria-label="下一页">下一页</button>
+  </nav>
+
+  <script>
+    (() => {
+      const stage = document.getElementById('deck-stage');
+      const slides = Array.from(document.querySelectorAll('.slide'));
+      const dotsWrap = document.getElementById('deck-dots');
+      let current = 0;
+
+      function fitStage() {
+        const scale = Math.min(window.innerWidth / 1920, window.innerHeight / 1080);
+        stage.style.transform = `translate(-50%, -50%) scale(${scale})`;
+      }
+
+      function goTo(index) {
+        current = Math.max(0, Math.min(slides.length - 1, index));
+        slides.forEach((s, i) => s.setAttribute('aria-hidden', String(i !== current)));
+        Array.from(dotsWrap.children).forEach((d, i) => d.setAttribute('aria-current', String(i === current)));
+        window.__CHS_CURRENT_SLIDE__ = current;
+      }
+
+      window.__CHS_GO_TO_SLIDE__ = goTo;
+
+      slides.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'deck-dot';
+        dot.setAttribute('aria-label', `第 ${i + 1} 页`);
+        dot.addEventListener('click', () => goTo(i));
+        dotsWrap.appendChild(dot);
+      });
+
+      document.getElementById('btn-prev').addEventListener('click', () => goTo(current - 1));
+      document.getElementById('btn-next').addEventListener('click', () => goTo(current + 1));
+
+      document.addEventListener('keydown', (e) => {
+        if (document.body.classList.contains('chs-editing')) return;
+        if (e.key === 'ArrowRight' || e.key === 'PageDown') goTo(current + 1);
+        else if (e.key === 'ArrowLeft' || e.key === 'PageUp') goTo(current - 1);
+        else if (e.key === 'Home') goTo(0);
+        else if (e.key === 'End') goTo(slides.length - 1);
+      });
+
+      window.addEventListener('resize', fitStage);
+      fitStage();
+      goTo(0);
+    })();
+  </script>
+  <script src="../assets/editor-runtime.js"></script>
+</body>
+</html>

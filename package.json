@@ -1,0 +1,16 @@
+{
+  "name": "html-studio",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Skill toolkit for producing bespoke HTML pages, 16:9 decks, and motion openers across any topic with in-place editing, Playwright visual QA, and PDF export.",
+  "scripts": {
+    "verify": "node scripts/verify_skill.mjs",
+    "lint": "node scripts/lint_html.mjs",
+    "inspect": "node scripts/inspect_render.mjs",
+    "export:pdf": "node scripts/export_pdf.mjs"
+  },
+  "devDependencies": {
+    "playwright": "^1.52.0"
+  }
+}

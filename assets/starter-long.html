@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="zh-CN" data-mode="long-profile" data-style="consulting-editorial">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="{{COMPANY_NAME}} 公司介绍与核心能力概览。">
+  <title>{{COMPANY_NAME}} — 公司介绍</title>
+  <style>
+    :root {
+      --paper: #F7F5F0;
+      --surface: #FFFFFF;
+      --ink: #16202A;
+      --muted: #52606D;
+      --accent: #1E4D40;
+      --accent-soft: #DCE8E4;
+      --line: #D8D4CA;
+      --font-display: "Noto Serif SC", Georgia, "Songti SC", serif;
+      --font-body: "Noto Sans SC", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", system-ui, sans-serif;
+      --font-mono: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+      --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+      --container: min(1160px, calc(100vw - 48px));
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--font-body);
+      line-height: 1.7;
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+    body { margin: 0; overflow-x: hidden; }
+    img, svg { max-width: 100%; height: auto; }
+    .tabular { font-variant-numeric: tabular-nums; }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+    }
+    .skip-link:focus {
+      left: 16px;
+      top: 16px;
+      background: var(--surface);
+      color: var(--ink);
+      padding: 8px 14px;
+      border-radius: 6px;
+      z-index: 1000;
+    }
+
+    .wrap { width: var(--container); margin-inline: auto; }
+
+    .masthead {
+      border-bottom: 1px solid var(--line);
+      padding: 18px 0;
+      background: var(--paper);
+    }
+    .masthead-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .brand-mark {
+      font-weight: 800;
+      font-size: 16px;
+      letter-spacing: 0.04em;
+    }
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      font-size: 14px;
+    }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      padding: 6px 2px;
+      min-height: 40px;
+      display: inline-flex;
+      align-items: center;
+    }
+    .nav-links a:hover, .nav-links a:focus-visible {
+      color: var(--accent);
+      outline: none;
+    }
+
+    .hero {
+      padding: clamp(48px, 8vw, 108px) 0 clamp(40px, 6vw, 80px);
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: clamp(28px, 5vw, 64px);
+      align-items: center;
+    }
+    .hero-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      border-radius: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+    .hero h1 {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.16;
+      margin: 0 0 20px;
+      letter-spacing: -0.01em;
+    }
+    .hero-lede {
+      font-size: clamp(16px, 1.8vw, 19px);
+      color: var(--muted);
+      max-width: 36em;
+      margin: 0 0 28px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 22px;
+      background: var(--accent);
+      color: #fff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 15px;
+      border-radius: 6px;
+      transition: transform 0.25s var(--ease-out), opacity 0.25s ease;
+    }
+    .btn-primary:hover, .btn-primary:focus-visible {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+    .hero-visual {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    section.band {
+      padding: clamp(44px, 6vw, 84px) 0;
+      border-top: 1px solid var(--line);
+    }
+    .band-header {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 24px 48px;
+      align-items: end;
+      margin-bottom: 36px;
+    }
+    .band-header h2 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: clamp(26px, 3.2vw, 38px);
+      line-height: 1.24;
+      margin: 0;
+    }
+    .band-header p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .metrics-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 2px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+    .metric-cell {
+      padding: 28px 24px 28px 0;
+    }
+    .metric-cell + .metric-cell {
+      padding-left: 24px;
+      border-left: 1px solid var(--line);
+    }
+    .metric-val {
+      display: block;
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: clamp(32px, 4vw, 48px);
+      line-height: 1.1;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .metric-label {
+      font-weight: 600;
+      font-size: 15px;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .metric-note {
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .split-panel {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+    .editorial-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid var(--line);
+    }
+    .editorial-list li {
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+    }
+    .editorial-list h3 {
+      margin: 0 0 6px;
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .editorial-list p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .svg-frame {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    footer.site-footer {
+      border-top: 1px solid var(--line);
+      padding: 36px 0 56px;
+      font-size: 13px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    @media (max-width: 820px) {
+      .hero, .band-header, .split-panel { grid-template-columns: 1fr; }
+      .metrics-strip { grid-template-columns: 1fr; }
+      .metric-cell + .metric-cell {
+        padding-left: 0;
+        border-left: 0;
+        border-top: 1px solid var(--line);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation: none !important;
+        transition: none !important;
+        scroll-behavior: auto !important;
+      }
+    }
+
+    @media print {
+      @page { size: A4 landscape; margin: 12mm; }
+      body { background: #fff; color: #000; }
+      [data-reveal] {
+        opacity: 1 !important;
+        transform: none !important;
+        visibility: visible !important;
+      }
+      section.band { break-inside: avoid; padding: 24px 0; }
+      .hero { padding: 20px 0; }
+      .btn-primary { background: #fff; color: #000; border: 1px solid #000; }
+    }
+  </style>
+</head>
+<body data-layout="long">
+  <a class="skip-link" href="#main-content">跳转到正文内容</a>
+
+  <header class="masthead" role="banner">
+    <div class="wrap masthead-inner">
+      <div class="brand-mark" data-editable-html>{{COMPANY_NAME}}</div>
+      <nav class="nav-links" aria-label="主导航">
+        <a href="#overview">企业概览</a>
+        <a href="#capabilities">核心能力</a>
+        <a href="#contact">联系我们</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main-content">
+    <div class="wrap">
+      <section class="hero" aria-labelledby="hero-heading">
+        <div>
+          <span class="hero-tag" data-editable-html>{{INDUSTRY_LABEL}}</span>
+          <h1 id="hero-heading" data-editable-html>{{HERO_HEADLINE}}</h1>
+          <p class="hero-lede" data-editable-html>{{HERO_SUBTITLE}}</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#capabilities" data-editable-html>了解业务方案</a>
+          </div>
+        </div>
+        <figure class="hero-visual">
+          <svg viewBox="0 0 480 340" role="img" aria-labelledby="hero-chart-title" data-exportable>
+            <title id="hero-chart-title">核心业务结构与增长示意图</title>
+            <rect x="0" y="0" width="480" height="340" rx="8" fill="#FBF9F5"/>
+            <text x="24" y="38" fill="#16202A" font-size="16" font-weight="700" data-editable-text>核心能力分布（示例结构图）</text>
+            <text x="24" y="60" fill="#52606D" font-size="12" data-editable-text>可替换为真实企业业务数据（演示数据）</text>
+            <rect x="24" y="100" width="120" height="190" rx="6" fill="#DCE8E4" data-editable-shape/>
+            <rect x="176" y="140" width="120" height="150" rx="6" fill="#1E4D40" data-editable-shape/>
+            <rect x="328" y="84" width="120" height="206" rx="6" fill="#C85A28" data-editable-shape/>
+            <text x="84" y="205" text-anchor="middle" fill="#16202A" font-size="22" font-weight="800" data-editable-text>模块 A</text>
+            <text x="236" y="220" text-anchor="middle" fill="#FFFFFF" font-size="22" font-weight="800" data-editable-text>模块 B</text>
+            <text x="388" y="195" text-anchor="middle" fill="#FFFFFF" font-size="22" font-weight="800" data-editable-text>模块 C</text>
+          </svg>
+        </figure>
+      </section>
+
+      <section id="overview" class="band" aria-labelledby="overview-heading">
+        <div class="band-header">
+          <h2 id="overview-heading" data-editable-html>用可验证的交付建立长期信任</h2>
+          <p data-editable-html>所有关键数据需来自企业真实披露信息；若为演示占位请明确标注。</p>
+        </div>
+        <div class="metrics-strip">
+          <div class="metric-cell" data-reveal>
+            <span class="metric-val tabular" data-editable-html>{{METRIC_1_VAL}}</span>
+            <span class="metric-label" data-editable-html>{{METRIC_1_LABEL}}</span>
+            <span class="metric-note" data-editable-html>{{METRIC_1_NOTE}}</span>
+          </div>
+          <div class="metric-cell" data-reveal>
+            <span class="metric-val tabular" data-editable-html>{{METRIC_2_VAL}}</span>
+            <span class="metric-label" data-editable-html>{{METRIC_2_LABEL}}</span>
+            <span class="metric-note" data-editable-html>{{METRIC_2_NOTE}}</span>
+          </div>
+          <div class="metric-cell" data-reveal>
+            <span class="metric-val tabular" data-editable-html>{{METRIC_3_VAL}}</span>
+            <span class="metric-label" data-editable-html>{{METRIC_3_LABEL}}</span>
+            <span class="metric-note" data-editable-html>{{METRIC_3_NOTE}}</span>
+          </div>
+        </div>
+      </section>
+
+      <section id="capabilities" class="band" aria-labelledby="cap-heading">
+        <div class="band-header">
+          <h2 id="cap-heading" data-editable-html>主营业务与解决方案</h2>
+          <p data-editable-html>围绕客户真实业务痛点组织模块，避免无意义的均等圆角套盒。</p>
+        </div>
+        <div class="split-panel">
+          <ul class="editorial-list">
+            <li>
+              <h3 data-editable-html>核心业务方向一</h3>
+              <p data-editable-html>简明阐述为客户解决什么问题、采用什么核心方法与交付标准。</p>
+            </li>
+            <li>
+              <h3 data-editable-html>核心业务方向二</h3>
+              <p data-editable-html>用具体场景、资质或服务保障增强决策信任。</p>
+            </li>
+            <li>
+              <h3 data-editable-html>核心业务方向三</h3>
+              <p data-editable-html>补充团队背景、客户案例或区域覆盖能力。</p>
+            </li>
+          </ul>
+          <div class="svg-frame">
+            <svg viewBox="0 0 460 280" role="img" aria-labelledby="timeline-title" data-exportable>
+              <title id="timeline-title">企业发展里程碑</title>
+              <text x="16" y="30" fill="#16202A" font-size="15" font-weight="700" data-editable-text>发展历程里程碑</text>
+              <line x1="36" y1="68" x2="36" y2="245" stroke="#D8D4CA" stroke-width="2"/>
+              <circle cx="36" cy="80" r="7" fill="#1E4D40" data-editable-shape/>
+              <circle cx="36" cy="155" r="7" fill="#1E4D40" data-editable-shape/>
+              <circle cx="36" cy="230" r="7" fill="#C85A28" data-editable-shape/>
+              <text x="60" y="85" fill="#16202A" font-size="14" font-weight="700" data-editable-text>2020年｜公司创立与核心团队组建</text>
+              <text x="60" y="160" fill="#16202A" font-size="14" font-weight="700" data-editable-text>2023年｜产品体系升级与规模化交付</text>
+              <text x="60" y="235" fill="#16202A" font-size="14" font-weight="700" data-editable-text>2026年｜全面服务行业标杆客户</text>
+            </svg>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer id="contact" class="wrap site-footer" role="contentinfo">
+    <div data-editable-html>© {{YEAR}} {{COMPANY_NAME}}（公司介绍资料）</div>
+    <div data-editable-html data-asset-status="licensed" data-license-source="Inline vector artwork generated for corporate profile">商务联系：{{CONTACT_INFO}}</div>
+  </footer>
+
+  <!-- Inline editor-runtime.js here for standalone offline delivery -->
+  <script src="../assets/editor-runtime.js"></script>
+</body>
+</html>
